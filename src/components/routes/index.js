@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import placard from "../placard";
+import MainPage from "./mainPage";
 
 class Routes extends Component {
   render() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={placard} />
+          <Route exact path="/" component={MainPage} />
         </Switch>
       </Router>
     );
