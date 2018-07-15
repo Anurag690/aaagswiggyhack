@@ -1,35 +1,42 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
 import {
-  SELECT_SUBREDDIT, INVALIDATE_SUBREDDIT,
-  REQUEST_POSTS, RECEIVE_POSTS
-} from '../actions'
+  SELECT_SUBREDDIT,
+  INVALIDATE_SUBREDDIT,
+  REQUEST_POSTS,
+  RECEIVE_POSTS
+} from "../actions";
 
-const selectedSubreddit = (state = 'reactjs', action) => {
+import mainPageReducer from "./mainPageReducer";
+
+const selectedSubreddit = (state = "reactjs", action) => {
   switch (action.type) {
     case SELECT_SUBREDDIT:
-      return action.subreddit
+      return action.subreddit;
     default:
-      return state
+      return state;
   }
-}
+};
 
-const posts = (state = {
-  isFetching: false,
-  didInvalidate: false,
-  items: []
-}, action) => {
+const posts = (
+  state = {
+    isFetching: false,
+    didInvalidate: false,
+    items: []
+  },
+  action
+) => {
   switch (action.type) {
     case INVALIDATE_SUBREDDIT:
       return {
         ...state,
         didInvalidate: true
-      }
+      };
     case REQUEST_POSTS:
       return {
         ...state,
         isFetching: true,
         didInvalidate: false
-      }
+      };
     case RECEIVE_POSTS:
       return {
         ...state,
@@ -37,13 +44,13 @@ const posts = (state = {
         didInvalidate: false,
         items: action.posts,
         lastUpdated: action.receivedAt
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-const postsBySubreddit = (state = { }, action) => {
+const postsBySubreddit = (state = {}, action) => {
   switch (action.type) {
     case INVALIDATE_SUBREDDIT:
     case RECEIVE_POSTS:
@@ -51,15 +58,16 @@ const postsBySubreddit = (state = { }, action) => {
       return {
         ...state,
         [action.subreddit]: posts(state[action.subreddit], action)
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 const rootReducer = combineReducers({
   postsBySubreddit,
-  selectedSubreddit
-})
+  selectedSubreddit,
+  mainPageReducer
+});
 
-export default rootReducer
+export default rootReducer;
