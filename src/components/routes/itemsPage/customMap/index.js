@@ -5,6 +5,7 @@ import {
   withGoogleMap,
   withScriptjs
 } from "react-google-maps";
+import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
 import { connect } from "react-redux";
 import ngeohash from "ngeohash";
 
@@ -31,16 +32,18 @@ class CustomMapper extends Component {
             lng: defaultCenterValueObj.lng
           }}
         >
-          {itemsArr.length &&
-            itemsArr.map((itemObj, key) => {
-              const latlon = ngeohash.decode(itemObj.geohash);
-              return (
-                <Marker
-                  key={key}
-                  position={{ lat: latlon.latitude, lng: latlon.longitude }}
-                />
-              );
-            })}
+          <MarkerClusterer>
+            {itemsArr.length &&
+              itemsArr.map((itemObj, key) => {
+                const latlon = ngeohash.decode(itemObj.geohash);
+                return (
+                  <Marker
+                    key={key}
+                    position={{ lat: latlon.latitude, lng: latlon.longitude }}
+                  />
+                );
+              })}
+          </MarkerClusterer>
         </GoogleMap>
       </div>
     );
