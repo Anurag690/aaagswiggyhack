@@ -36,13 +36,18 @@ function mainPageFormDataFail(errorResponse) {
   };
 }
 
-function fetchCategoryDataFromServer(requestPayload) {
+function fetchCategoryDataFromServer(requestPayload, historyObj) {
   return async (dispatch, getState) => {
     try {
       dispatch(mainPageFormDataRequest());
       const response = await categoryService.fetchCategoryData(requestPayload);
       //   const response = fakeData;
-      dispatch(mainPageFormDataSuccess(response));
+      if (requestPayload.flag === 2) {
+        dispatch(updateSelectedCategoryCard(response, 2));
+        historyObj.push("/items");
+      } else {
+        dispatch(mainPageFormDataSuccess(response));
+      }
     } catch (error) {
       alert("Error in Fetching the Data");
       console.log("%c error ", "background: salmon; color: black", error);
@@ -51,10 +56,11 @@ function fetchCategoryDataFromServer(requestPayload) {
   };
 }
 
-function updateSelectedCategoryCard(categoryObj) {
+function updateSelectedCategoryCard(categoryObj, filterType = 1) {
   return {
     type: mainPageConstants.updatedSelectedCategory,
-    data: categoryObj
+    data: categoryObj,
+    filterType
   };
 }
 

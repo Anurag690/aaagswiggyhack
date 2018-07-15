@@ -8,6 +8,7 @@ import {
   Button
 } from "react-bootstrap";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import mainPageActions from "../../../store/actions/mainPage";
 import Card from "./card/index";
@@ -86,7 +87,7 @@ class MainPage extends Component {
       "background: lime; color: black",
       requestPayload
     );
-    this.props.fetchCategoryDataFromServer(requestPayload);
+    this.props.fetchCategoryDataFromServer(requestPayload, this.props.history);
   }
 
   render() {
@@ -192,13 +193,17 @@ const mapDispatchToProps = dispatch => ({
     dispatch(mainPageActions.updateFormData(formData)),
   updateGeoLocationValidation: geoLocationObj =>
     dispatch(mainPageActions.updateGeoLocationValidation(geoLocationObj)),
-  fetchCategoryDataFromServer: requestPayload =>
-    dispatch(mainPageActions.fetchCategoryDataFromServer(requestPayload))
+  fetchCategoryDataFromServer: (requestPayload, history) =>
+    dispatch(
+      mainPageActions.fetchCategoryDataFromServer(requestPayload, history)
+    )
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainPage);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(MainPage)
+);
 
 // export default MainPage;

@@ -31,8 +31,8 @@ const initialState = {
   },
 
   categoryData: {
-    value: fakeData
-    // value: []
+    // value: fakeData
+    value: []
   },
 
   selectedCategoryObj: {
@@ -63,8 +63,14 @@ const mainPageReducer = (state = initialState, action) => {
       };
     }
     case mainPageConstants.updatedSelectedCategory: {
-      const categoryName = Object.keys(action.data)[0];
-      const itemsArr = action.data[categoryName];
+      let categoryName = "";
+      let itemsArr = [];
+      if (action.filterType === 1) {
+        categoryName = Object.keys(action.data)[0];
+        itemsArr = action.data[categoryName];
+      } else {
+        itemsArr = action.data;
+      }
       return {
         ...state,
         selectedCategoryObj: {
