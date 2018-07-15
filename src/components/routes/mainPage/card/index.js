@@ -12,9 +12,22 @@ import _ from "lodash";
 
 import CardItem from "./cardItem";
 
+import mainPageActions from "../../../../store/actions/mainPage";
+
 import "./styles.css";
 
 class Card extends Component {
+  constructor(props) {
+    super(props);
+    this.handleCardClick = this.handleCardClick.bind(this);
+  }
+  handleCardClick(e, categoryObj) {
+    if (e) {
+      e.preventDefault();
+    }
+
+    this.props.updateSelectedCategoryCard(categoryObj);
+  }
   render() {
     return (
       <div>
@@ -33,6 +46,7 @@ class Card extends Component {
                       title={Object.keys(cardObj)[0]}
                       key={index}
                       className={`bg-${index % 5}`}
+                      onClick={e => this.handleCardClick(e, cardObj)}
                     />
                   );
                 })
@@ -53,7 +67,11 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  updateSelectedCategoryCard: categoryObj => {
+    dispatch(mainPageActions.updateSelectedCategoryCard(categoryObj));
+  }
+});
 
 export default connect(
   mapStateToProps,

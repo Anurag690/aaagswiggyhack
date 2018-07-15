@@ -51,8 +51,16 @@ function fetchCategoryDataFromServer(requestPayload) {
   };
 }
 
+function updateSelectedCategoryCard(categoryObj) {
+  return {
+    type: mainPageConstants.updatedSelectedCategory,
+    data: categoryObj
+  };
+}
+
 export default {
   updateFormData,
   updateGeoLocationValidation,
-  fetchCategoryDataFromServer
+  fetchCategoryDataFromServer,
+  updateSelectedCategoryCard
 };

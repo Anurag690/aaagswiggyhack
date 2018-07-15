@@ -32,6 +32,10 @@ const initialState = {
 
   categoryData: {
     value: fakeData
+  },
+
+  selectedCategoryObj: {
+    value: {}
   }
 };
 
@@ -53,6 +57,18 @@ const mainPageReducer = (state = initialState, action) => {
       return {
         ...state,
         categoryData: { value: action.data }
+      };
+    }
+    case mainPageConstants.updatedSelectedCategory: {
+      const categoryName = Object.keys(action.data)[0];
+      const itemsArr = action.data[categoryName];
+      return {
+        ...state,
+        selectedCategoryObj: {
+          value: action.data,
+          categoryName,
+          itemsArr
+        }
       };
     }
 

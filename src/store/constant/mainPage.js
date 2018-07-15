@@ -4,7 +4,9 @@ const mainPageConstants = {
 
   mainPageFormDataRequest: "MAIN_PAGE_FORM_DATA_REQUEST",
   mainPageFormDataSuccess: "MAIN_PAGE_FORM_DATA_Success",
-  mainPageFormDataFail: "MAIN_PAGE_FORM_DATA_Fail"
+  mainPageFormDataFail: "MAIN_PAGE_FORM_DATA_Fail",
+
+  updatedSelectedCategory: "UPDATE_SELECTED_CATEGORY_CARD"
 };
 
 export default mainPageConstants;
