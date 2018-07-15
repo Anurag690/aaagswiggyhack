@@ -31,7 +31,8 @@ const initialState = {
   },
 
   categoryData: {
-    value: fakeData
+    // value: fakeData
+    value: []
   },
 
   selectedCategoryObj: {
