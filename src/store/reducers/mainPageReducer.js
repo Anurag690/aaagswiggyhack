@@ -27,6 +27,10 @@ const initialState = {
         msg: ""
       }
     }
+  },
+
+  categoryData: {
+    value: []
   }
 };
 

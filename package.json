@@ -20,7 +20,8 @@
     "reactstrap": "^6.3.0",
     "redux": "^3.5.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "whatwg-fetch": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

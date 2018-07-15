@@ -27,6 +27,7 @@ class MainPage extends Component {
     this.handleGeoLocationValidation = this.handleGeoLocationValidation.bind(
       this
     );
+    this.handleSubmitBtnClick = this.handleSubmitBtnClick.bind(this);
   }
   handleChange(e) {
     if (e) {
@@ -71,6 +72,23 @@ class MainPage extends Component {
     }
     this.props.updateGeoLocationValidation(geoLocationObj);
   }
+  handleSubmitBtnClick(e) {
+    if (e) {
+      e.preventDefault();
+    }
+    const requestPayload = {
+      userId: _.get(this.props.geoLocationObj, "value", ""),
+      flag: parseInt(_.get(this.props.filterTypeObj, "value", ""), 10),
+      geohash: _.get(this.props.userIdObj, "value", "")
+    };
+    console.log(
+      "%c requestPayload ",
+      "background: lime; color: black",
+      requestPayload
+    );
+    this.props.fetchCategoryDataFromServer(requestPayload);
+  }
+
   render() {
     return (
       <div className="app-container">
@@ -140,7 +158,13 @@ class MainPage extends Component {
                     </FormGroup>
                   </Panel.Body>
                   <Panel.Footer className="text-center">
-                    <Button bsStyle="success"> Submit </Button>
+                    <Button
+                      bsStyle="success"
+                      onClick={this.handleSubmitBtnClick}
+                    >
+                      {" "}
+                      Submit{" "}
+                    </Button>
                   </Panel.Footer>
                 </Panel>
               </div>
@@ -167,7 +191,9 @@ const mapDispatchToProps = dispatch => ({
   updateFormData: formData =>
     dispatch(mainPageActions.updateFormData(formData)),
   updateGeoLocationValidation: geoLocationObj =>
-    dispatch(mainPageActions.updateGeoLocationValidation(geoLocationObj))
+    dispatch(mainPageActions.updateGeoLocationValidation(geoLocationObj)),
+  fetchCategoryDataFromServer: requestPayload =>
+    dispatch(mainPageActions.fetchCategoryDataFromServer(requestPayload))
 });
 
 export default connect(
