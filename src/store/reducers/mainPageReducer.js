@@ -38,6 +38,12 @@ const mainPageReducer = (state = initialState, action) => {
         formData: { ...action.data }
       };
     }
+    case mainPageConstants.updateGeoLocationValidation: {
+      return {
+        ...state,
+        formData: { ...state.formData, geoLocation: { ...action.data } }
+      };
+    }
 
     default: {
       return { ...state };

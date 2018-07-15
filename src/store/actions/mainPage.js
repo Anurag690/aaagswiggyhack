@@ -6,5 +6,11 @@ function updateFormData(formData) {
     data: formData
   };
 }
+function updateGeoLocationValidation(geoLocationObj) {
+  return {
+    type: mainPageConstants.updateGeoLocationValidation,
+    data: geoLocationObj
+  };
+}
 
-export default { updateFormData };
+export default { updateFormData, updateGeoLocationValidation };

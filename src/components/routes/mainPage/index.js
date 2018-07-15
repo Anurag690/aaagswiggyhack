@@ -57,6 +57,19 @@ class MainPage extends Component {
     if (e) {
       e.preventDefault();
     }
+    const geoLocationObj = { ...this.props.geoLocationObj };
+    if (geoLocationObj.value && geoLocationObj.value.length !== 7) {
+      geoLocationObj.error = {
+        isError: true,
+        msg: "Geo Location Has To be 7 Characters"
+      };
+    } else {
+      geoLocationObj.error = {
+        isError: false,
+        msg: ""
+      };
+    }
+    this.props.updateGeoLocationValidation(geoLocationObj);
   }
   render() {
     return (
@@ -71,7 +84,14 @@ class MainPage extends Component {
                 <Panel bsStyle="primary">
                   <Panel.Heading>Input Form</Panel.Heading>
                   <Panel.Body>
-                    <FormGroup controlId="formBasicText">
+                    <FormGroup
+                      controlId="formBasicText"
+                      validationState={
+                        _.get(this.props.geoLocationObj, "error.isError", false)
+                          ? "error"
+                          : null
+                      }
+                    >
                       <ControlLabel>Geo Location</ControlLabel>
                       <FormControl
                         type="text"
@@ -81,6 +101,11 @@ class MainPage extends Component {
                         onBlur={this.handleGeoLocationValidation}
                         value={_.get(this.props.geoLocationObj, "value", "")}
                       />
+                      {_.get(this.props.geoLocationObj, "error.msg", "") && (
+                        <ControlLabel>
+                          {_.get(this.props.geoLocationObj, "error.msg", "")}
+                        </ControlLabel>
+                      )}
                     </FormGroup>
                     <FormGroup>
                       <ControlLabel>Filter Type</ControlLabel> &nbsp;
@@ -137,10 +162,12 @@ function mapStateToProps(state) {
     userIdObj: _.get(state.mainPageReducer, "formData.userId", {})
   };
 }
+
 const mapDispatchToProps = dispatch => ({
-  updateFormData: formData => {
-    dispatch(mainPageActions.updateFormData(formData));
-  }
+  updateFormData: formData =>
+    dispatch(mainPageActions.updateFormData(formData)),
+  updateGeoLocationValidation: geoLocationObj =>
+    dispatch(mainPageActions.updateGeoLocationValidation(geoLocationObj))
 });
 
 export default connect(
