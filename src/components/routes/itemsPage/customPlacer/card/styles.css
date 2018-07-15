@@ -1,0 +1,8 @@
+.item-card-container {
+  border: 1px solid;
+  box-shadow: burlywood;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
