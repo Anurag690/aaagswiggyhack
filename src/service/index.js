@@ -11,6 +11,7 @@ async function fetchCategoryData(requestPayload) {
         "Content-Type": "application/json"
       },
       method: "POST",
+    //   body: requestPayload,
       body: requestPayload ? JSON.stringify(requestPayload) : {}
     };
     return new Promise(async (resolve, reject) => {

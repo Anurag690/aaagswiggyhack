@@ -17,7 +17,7 @@
 }
 
 .bg-0 {
-  background: rgb(52, 73, 94);
+  background: rgb(52, 73, 94, 0.1);
 }
 .bg-1 {
   background: rgb(190, 195, 199);
