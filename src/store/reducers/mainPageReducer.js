@@ -30,6 +30,8 @@ const initialState = {
     }
   },
 
+  isLoading: false,
+
   categoryData: {
     // value: fakeData
     value: []
@@ -56,10 +58,23 @@ const mainPageReducer = (state = initialState, action) => {
         formData: { ...state.formData, geoLocation: { ...action.data } }
       };
     }
+    case mainPageConstants.mainPageFormDataRequest: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
     case mainPageConstants.mainPageFormDataSuccess: {
       return {
         ...state,
+        isLoading: false,
         categoryData: { value: action.data }
+      };
+    }
+    case mainPageConstants.mainPageFormDataFail: {
+      return {
+        ...state,
+        isLoading: false
       };
     }
     case mainPageConstants.updatedSelectedCategory: {

@@ -165,6 +165,9 @@ class MainPage extends Component {
                     >
                       {" "}
                       Submit{" "}
+                      {this.props.isLoading && (
+                        <i className="button-loading fa fa-refresh fa-spin" />
+                      )}
                     </Button>
                   </Panel.Footer>
                 </Panel>
@@ -184,7 +187,8 @@ function mapStateToProps(state) {
   return {
     geoLocationObj: _.get(state.mainPageReducer, "formData.geoLocation", {}),
     filterTypeObj: _.get(state.mainPageReducer, "formData.filterType", {}),
-    userIdObj: _.get(state.mainPageReducer, "formData.userId", {})
+    userIdObj: _.get(state.mainPageReducer, "formData.userId", {}),
+    isLoading: _.get(state.mainPageReducer, "isLoading", false)
   };
 }
 
