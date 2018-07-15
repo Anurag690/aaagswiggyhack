@@ -3,6 +3,7 @@ import fetch from "./core";
 async function fetchCategoryData(requestPayload) {
   try {
     const url = "http://172.16.120.184:5000/recommendation";
+    // const url = "172.16.120.184:5000/recommendation";
     const fetchObject = {
       headers: {
         Accept: "application/json",
@@ -11,7 +12,15 @@ async function fetchCategoryData(requestPayload) {
       method: "POST",
       body: requestPayload
     };
-    return fetch(url, fetchObject);
+    return new Promise(async (resolve, reject) => {
+      try {
+        const fetchResult = await fetch(url, fetchObject);
+        const response = await fetchResult.json();
+        resolve(response);
+      } catch (error) {
+        reject(error);
+      }
+    });
   } catch (error) {
     console.log("%c some error ", "background: salmon; color: black", error);
   }

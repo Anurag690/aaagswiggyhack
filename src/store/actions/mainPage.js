@@ -1,6 +1,8 @@
 import mainPageConstants from "../constant/mainPage";
 import categoryService from "../../service/index";
 
+import fakeData from "../../service/fakeData/index";
+
 function updateFormData(formData) {
   return {
     type: mainPageConstants.updateFormData,
@@ -39,6 +41,7 @@ function fetchCategoryDataFromServer(requestPayload) {
     try {
       dispatch(mainPageFormDataRequest());
       const response = await categoryService.fetchCategoryData(requestPayload);
+      //   const response = fakeData;
       dispatch(mainPageFormDataSuccess(response));
     } catch (error) {
       alert("Error in Fetching the Data");

@@ -1,4 +1,5 @@
 import mainPageConstants from "../constant/mainPage";
+import fakeData from "../../service/fakeData/index";
 
 /**
  * Contains the State Related to the Login Credentials
@@ -30,7 +31,7 @@ const initialState = {
   },
 
   categoryData: {
-    value: []
+    value: fakeData
   }
 };
 
@@ -46,6 +47,12 @@ const mainPageReducer = (state = initialState, action) => {
       return {
         ...state,
         formData: { ...state.formData, geoLocation: { ...action.data } }
+      };
+    }
+    case mainPageConstants.mainPageFormDataSuccess: {
+      return {
+        ...state,
+        categoryData: { value: action.data }
       };
     }
 
