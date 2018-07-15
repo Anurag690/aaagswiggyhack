@@ -6,6 +6,11 @@ import _ from "lodash";
 import "./styles.css";
 class Card extends Component {
   render() {
+    console.log(
+      "%c this.props.obj ",
+      "background: aqua; color: black",
+      this.props.obj
+    );
     const latlon123 = ngeohash.decode(_.get(this.props.obj, "geohash", "-"));
     return (
       <div className="item-card-container">
@@ -21,6 +26,9 @@ class Card extends Component {
         </div>
         <div>
           <Col> Restaurant Id {_.get(this.props.obj, "rest_id", "-")} </Col>
+        </div>
+        <div>
+          <Col> Count {_.get(this.props, "count", "-")} </Col>
         </div>
       </div>
     );

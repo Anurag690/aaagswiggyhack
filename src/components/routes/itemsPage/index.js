@@ -17,7 +17,6 @@ class ItemsPage extends Component {
           containerElement={<div style={{ height: `620px`, flex: 1 }} />}
           mapElement={<div style={{ height: `100%` }} />}
         />
-        
         <CustomPlacer />
       </div>
     );

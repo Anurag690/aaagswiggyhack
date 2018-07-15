@@ -12,6 +12,13 @@ import ngeohash from "ngeohash";
 import _ from "lodash";
 
 class CustomMapper extends Component {
+  constructor(props) {
+    super(props);
+    this.pleaseLogObject = this.pleaseLogObject.bind(this);
+  }
+  pleaseLogObject(object) {
+    console.log("%c object ", "background: aqua; color: black", object);
+  }
   render() {
     const defaultCenterValueObj = {
       lat: "",
@@ -23,28 +30,38 @@ class CustomMapper extends Component {
       defaultCenterValueObj.lat = latlon123.latitude;
       defaultCenterValueObj.lng = latlon123.longitude;
     }
+    console.log(
+      "%c defaultCenterValueObj ",
+      "background: aqua; color: black",
+      defaultCenterValueObj
+    );
     return (
       <div>
-        <GoogleMap
-          defaultZoom={15}
-          defaultCenter={{
-            lat: defaultCenterValueObj.lat,
-            lng: defaultCenterValueObj.lng
-          }}
-        >
-          <MarkerClusterer>
-            {itemsArr.length &&
-              itemsArr.map((itemObj, key) => {
-                const latlon = ngeohash.decode(itemObj.geohash);
-                return (
-                  <Marker
-                    key={key}
-                    position={{ lat: latlon.latitude, lng: latlon.longitude }}
-                  />
-                );
-              })}
-          </MarkerClusterer>
-        </GoogleMap>
+        {itemsArr && itemsArr.length ? (
+          <GoogleMap
+            defaultZoom={15}
+            defaultCenter={{
+              lat: defaultCenterValueObj.lat,
+              lng: defaultCenterValueObj.lng
+            }}
+          >
+            <MarkerClusterer>
+              {itemsArr.length &&
+                itemsArr.map((itemObj, key) => {
+                  const latlon = ngeohash.decode(itemObj.geohash);
+                  this.pleaseLogObject(itemObj);
+                  return (
+                    <Marker
+                      key={key}
+                      position={{ lat: latlon.latitude, lng: latlon.longitude }}
+                    />
+                  );
+                })}
+            </MarkerClusterer>
+          </GoogleMap>
+        ) : (
+          <div> No Data Available </div>
+        )}
       </div>
     );
   }

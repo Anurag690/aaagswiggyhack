@@ -43,6 +43,7 @@ function fetchCategoryDataFromServer(requestPayload, historyObj) {
       const response = await categoryService.fetchCategoryData(requestPayload);
       //   const response = fakeData;
       if (requestPayload.flag === 2) {
+        dispatch(updateSelectedCategoryCard([]));
         dispatch(updateSelectedCategoryCard(response, 2));
         historyObj.push("/items");
       } else {
