@@ -31,12 +31,14 @@ const initialState = {
   },
 
   categoryData: {
-    // value: fakeData
-    value: []
+    value: fakeData
+    // value: []
   },
 
   selectedCategoryObj: {
-    value: {}
+    value: {},
+    itemsArr: [],
+    categoryName: ""
   }
 };
 
