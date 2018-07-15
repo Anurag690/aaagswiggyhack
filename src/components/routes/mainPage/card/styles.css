@@ -1,0 +1,34 @@
+.card-item-container {
+  min-height: 130px;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.card-panel-body-container {
+  display: flex;
+  margin: 0 5px;
+  justify-content: space-evenly;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.bg-0 {
+  background: rgb(52, 73, 94);
+}
+.bg-1 {
+  background: rgb(190, 195, 199);
+}
+.bg-2 {
+  background: rgb(22, 160, 134);
+}
+.bg-3 {
+  background: rgb(150, 166, 166);
+}
+
+.bg-4 {
+  background: rgb(53, 152, 220);
+}

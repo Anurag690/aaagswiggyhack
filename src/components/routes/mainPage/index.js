@@ -8,14 +8,16 @@ import {
   Button
 } from "react-bootstrap";
 
+import Card from "./card/index";
+
 import "./styles.css";
 
 class MainPage extends Component {
   render() {
     return (
       <div className="app-container">
-        <div className="container">
-          <div className="main-page-container">
+        <div className="main-page-container">
+          <div className="container">
             <div className="main-page-wrapper">
               <div className="main-page-title">
                 <h1>Swiggy Hackathon</h1>
@@ -49,6 +51,9 @@ class MainPage extends Component {
                     <Button bsStyle="success"> Submit </Button>
                   </Panel.Footer>
                 </Panel>
+              </div>
+              <div className="main-page-form">
+                <Card />
               </div>
             </div>
           </div>
