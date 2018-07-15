@@ -7,6 +7,8 @@ import {
   Radio,
   Button
 } from "react-bootstrap";
+import { connect } from "react-redux";
+import _ from "lodash";
 
 import CardItem from "./cardItem";
 
@@ -20,15 +22,21 @@ class Card extends Component {
         <Panel bsStyle="primary">
           <Panel.Heading>Card</Panel.Heading>
           <Panel.Body className="card-panel-body-container">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((cardObj, index) => {
-              return (
-                <CardItem
-                  title="abc"
-                  key={index}
-                  className={`bg-${index % 5}`}
-                />
-              );
-            })}
+            {this.props.categoryData &&
+              this.props.categoryData.length === 0 && (
+                <div> No Category available </div>
+              )}
+            {this.props.categoryData && this.props.categoryData.length
+              ? this.props.categoryData.map((cardObj, index) => {
+                  return (
+                    <CardItem
+                      title={Object.keys(cardObj)[0]}
+                      key={index}
+                      className={`bg-${index % 5}`}
+                    />
+                  );
+                })
+              : null}
           </Panel.Body>
           {/* <Panel.Footer className="text-center">
             <Button bsStyle="success"> Submit </Button>
@@ -39,4 +47,17 @@ class Card extends Component {
   }
 }
 
-export default Card;
+function mapStateToProps(state) {
+  return {
+    categoryData: _.get(state.mainPageReducer, "categoryData.value", [])
+  };
+}
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Card);
+
+// export default Card;
