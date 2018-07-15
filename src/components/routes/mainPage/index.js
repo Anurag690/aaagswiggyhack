@@ -77,7 +77,7 @@ class MainPage extends Component {
       e.preventDefault();
     }
     const requestPayload = {
-      userId: _.get(this.props.geoLocationObj, "value", ""),
+      userid: _.get(this.props.geoLocationObj, "value", ""),
       flag: parseInt(_.get(this.props.filterTypeObj, "value", ""), 10),
       geohash: _.get(this.props.userIdObj, "value", "")
     };
