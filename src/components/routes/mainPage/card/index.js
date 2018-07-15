@@ -7,6 +7,7 @@ import {
   Radio,
   Button
 } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import _ from "lodash";
 
@@ -27,6 +28,7 @@ class Card extends Component {
     }
 
     this.props.updateSelectedCategoryCard(categoryObj);
+    this.props.history.push(`/items`);
   }
   render() {
     return (
@@ -73,9 +75,11 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Card);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Card)
+);
 
 // export default Card;
